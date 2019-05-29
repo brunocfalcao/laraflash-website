@@ -1,9 +1,9 @@
 <?php
 
-use Zttp\Zttp;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Laraflash\DAL\Models\Thumbnail;
+use Zttp\Zttp;
 
 Route::get('search', 'Laraflash\Website\Features\Search\Controllers\FeatureController@search')->name('search');
 Route::get('/', 'Laraflash\Website\Features\Welcome\Controllers\FeatureController@index');
@@ -16,8 +16,7 @@ route::get('about', 'Laraflash\Website\Features\About\Controllers\FeatureControl
 route::post('/register-newsletter', 'Laraflash\Website\Features\Welcome\Controllers\FeatureController@registerNewsletter')->name('register.newsletter');
 
 Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, $hash, $hook = 'center') {
-
-    $targetWidth  = $width;
+    $targetWidth = $width;
     $targetHeight = $height;
 
     // Compute filename (database or default.png).
@@ -30,7 +29,7 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
         if (!File::exists(storage_path("app/public/defaults/{$filename}.jpg"))) {
             // Use the default Laraflash news image and resize it.
             $filename = 'default';
-        };
+        }
 
         $img = Image::make(storage_path("app/public/defaults/{$filename}.jpg"));
 
@@ -50,12 +49,12 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
         $img->resizeCanvas($targetWidth, $targetHeight, $hook, false, 'ffffff');
 
         return $img->response();
-    };
+    }
 
     // Identify file location or return default Laraflash image.
     $filePath = File::exists(storage_path("app/public/images/{$thumbnail->filename}")) ?
                 storage_path("app/public/images/{$thumbnail->filename}") :
-                storage_path("app/public/defaults/default.jpg");
+                storage_path('app/public/defaults/default.jpg');
 
     // Verify if we have this image already in cache.
     $extension = collect(explode('.', $thumbnail->filename))->pop();
@@ -65,8 +64,9 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
     if (File::exists($fileCachePath)) {
         header("Content-type: image/{$extension}");
         readfile($fileCachePath);
+
         return;
-    };
+    }
 
     // No cache. Create image.
     $img = Image::make($filePath);
@@ -96,7 +96,7 @@ Route::get('medium', function () {
     // https://medium.com/@taylorotwell/latest
 
     // Grab json request.
-    $json = $response = Zttp::get("https://medium.com/@taylorotwell/latest?format=json");
+    $json = $response = Zttp::get('https://medium.com/@taylorotwell/latest?format=json');
 
     return response()->json(json_decode(substr($json->body(), 16)));
 });

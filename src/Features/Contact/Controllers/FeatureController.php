@@ -4,8 +4,8 @@ namespace Laraflash\Website\Features\Contact\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
-use Laraflash\Website\Mail\ContactRequested;
 use Laraflash\Website\Features\Contact\FormRequests\StoreFormRequest;
+use Laraflash\Website\Mail\ContactRequested;
 
 class FeatureController extends Controller
 {

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\View;
 use Laraflash\DAL\Models\Article;
 use Laraflash\DAL\Models\CategoryMap;
 use Laraflash\DAL\Models\CategoryPosition;
@@ -26,7 +25,7 @@ class FeatureController extends Controller
             $universe = function () {
                 return Article::query();
             };
-        };
+        }
 
         // Random articles from last 30 days.
         if (request()->input('q') == 1) {
@@ -34,7 +33,7 @@ class FeatureController extends Controller
                 return Article::where('posted_at', '>', now()->subMonth(1))
                                            ->orderByRaw('rand()');
             };
-        };
+        }
 
         // Random articles from last 60 days.
         if (request()->input('q') == 2) {
@@ -42,14 +41,14 @@ class FeatureController extends Controller
                 return Article::where('posted_at', '>', now()->subMonth(2))
                                            ->orderByRaw('rand()');
             };
-        };
+        }
 
         // Random articles.
         if (request()->input('q') == 99) {
             $universe = function () {
                 return Article::orderByRaw('rand()');
             };
-        };
+        }
 
         // Featured articles -- Latest 4 not tweets.
         $featured = $universe()->where('type', '<>', 'tweet')
@@ -113,7 +112,7 @@ class FeatureController extends Controller
 
             $categoryArticlesIds = $categoryArticles->pluck('id')
                                                     ->map(function ($item) {
-                                                          return "'{$item}'";
+                                                        return "'{$item}'";
                                                     });
 
             if ($categoryArticles->count() < 6) {
@@ -125,7 +124,7 @@ class FeatureController extends Controller
                                                     ->whereNotIn('id', $featuredIdsArray)
                                                     ->whereNotIn('id', $categoryArticlesIds)
                                                     ->newest()
-                                                    ->take(6-$categoryArticles->count())
+                                                    ->take(6 - $categoryArticles->count())
                                                     ->offset(1)
                                                     ->get();
 
@@ -133,7 +132,7 @@ class FeatureController extends Controller
                 $remainingCategoryArticles->each(function ($item) use ($categoryArticles) {
                     $categoryArticles->push($item);
                 });
-            };
+            }
 
             $articlesPerCategory->put($item->article_category, $categoryArticles);
         });
@@ -179,7 +178,7 @@ class FeatureController extends Controller
             $count = DB::select(DB::raw('select count(1) as total from articles where deleted_at is null'));
             $articlesTotal = $count[0]->total;
         } else {
-        // Get total articles count.
+            // Get total articles count.
             $articlesTotal = $universe()->get()->count();
         }
 
@@ -207,7 +206,7 @@ class FeatureController extends Controller
         //Newsletter::create(['email' => request()->input('email')]);
 
         Mail::to(request()->input('email'))
-              ->send(new NewsletterAdded);
+              ->send(new NewsletterAdded());
 
         return flame('newsletter-done');
     }

@@ -45,14 +45,14 @@ class CrawlCommand extends Command
             $source = DataSource::all();
         } else {
             $source = collect([DataSource::findOrFail($this->option('source'))]);
-        };
+        }
 
         // Start crawling.
         foreach ($source as $item) {
-            $this->info("--------------------------------------------------------");
+            $this->info('--------------------------------------------------------');
             $this->info("Crawl for '{$item->name}' started ...");
             if ($this->option('viajob')) {
-                $this->info("Dispatching job ...");
+                $this->info('Dispatching job ...');
                 FetchArticlesFromDataSourceJob::dispatch($item, $this->option('attribute'), $this->option('value'))
                                               ->onQueue(App::environment());
             } else {
@@ -60,9 +60,9 @@ class CrawlCommand extends Command
                 if (!is_null($this->option('attribute')) && !is_null($this->option('value'))) {
                     $this->info("Setting crawler attribute {$this->option('attribute')} to {$this->option('value')}");
                     $crawler->{$this->option('attribute')} = $this->option('value');
-                };
+                }
                 $crawler->process();
-            };
+            }
 
             $this->info("Crawl for '{$item->name}' finished!");
         }
