@@ -18,7 +18,7 @@ class FeatureController extends Controller
         // Retrieve all the articles that have a title or description with that text.
         // No tweets.
         $articles = Article::where(function ($query) use ($search) {
-                                $query->where('title', 'like', "%{$search}%")
+            $query->where('title', 'like', "%{$search}%")
                                       ->orWhere('subtitle', 'like', "%{$search}%");
         })
                            ->where('type', '<>', 'tweet')

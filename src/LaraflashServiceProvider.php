@@ -2,11 +2,9 @@
 
 namespace Laraflash\Website;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laraflash\Website\Commands\CrawlCommand;
-use Laraflash\Website\Commands\RefreshArticlesCommand;
 
 class LaraflashServiceProvider extends ServiceProvider
 {
@@ -20,16 +18,16 @@ class LaraflashServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                CrawlCommand::class
+                CrawlCommand::class,
             ]);
-        };
+        }
 
         // Enable query log via environment configuration.
         if (env('LARANING_ENABLE_QUERY_LOG') === true) {
             DB::listen(function ($query) {
                 Log::info($query->sql, $query->bindings, $query->time);
             });
-        };
+        }
     }
 
     public function register()
@@ -41,13 +39,12 @@ class LaraflashServiceProvider extends ServiceProvider
     protected function loadRoutes()
     {
         $requests = config('app.env') == 'production' ? 30 : 60;
-        Route::group(['middleware' =>
-            ['web',
+        Route::group(['middleware' => ['web',
                /*"throttle:{$requests},1",*/
                /*'firewall-blacklist',
-               'firewall-blockattacks'*/]
+               'firewall-blockattacks'*/],
            ], function ($router) {
-                $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+               $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
            });
     }
 

@@ -3,9 +3,9 @@
 namespace Laraflash\Website\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ContactRequested extends Mailable implements ShouldQueue
 {
@@ -36,13 +36,13 @@ class ContactRequested extends Mailable implements ShouldQueue
      */
     public function build()
     {
-            $this->withSwiftMessage(function (\Swift_Message $message) {
-                $message->getHeaders()->addTextHeader('tag', 'Contact Request');
-            });
+        $this->withSwiftMessage(function (\Swift_Message $message) {
+            $message->getHeaders()->addTextHeader('tag', 'Contact Request');
+        });
 
-            list($name, $email, $subject, $message) = [$this->name, $this->email, $this->subject, $this->message];
+        list($name, $email, $subject, $message) = [$this->name, $this->email, $this->subject, $this->message];
 
-            return $this->from('system@laraflash.com')
+        return $this->from('system@laraflash.com')
                         ->subject($subject)
                         ->replyTo($email, $name)
                         ->html($message);

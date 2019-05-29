@@ -3,10 +3,10 @@
 namespace Laraflash\Website\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Laraflash\DAL\Models\DataSource;
 
 class FetchArticlesFromDataSourceJob implements ShouldQueue
@@ -40,7 +40,7 @@ class FetchArticlesFromDataSourceJob implements ShouldQueue
 
         if (!is_null($this->attribute) && !is_null($this->value)) {
             $crawler->{$this->attribute} = $this->value;
-        };
+        }
 
         $crawler->process();
     }
