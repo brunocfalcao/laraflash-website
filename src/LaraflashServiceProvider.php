@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laraflash\Website\Commands\CrawlCommand;
+use Laraflash\Website\Commands\RefreshArticlesCommand;
 
 class LaraflashServiceProvider extends ServiceProvider
 {

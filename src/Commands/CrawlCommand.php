@@ -14,10 +14,7 @@ class CrawlCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'laraflash:crawl {--source= : Source ID or null}
-                                            {--attribute= : Attribute name}
-                                            {--value= : Value}
-                                            {--viajob : If it should dispatched via a Job (true/false)}';
+    protected $signature = 'laraflash:crawl {--source= : Source ID or null} {--attribute= : Attribute name} {--value= : Value} {--viajob : If it should dispatched via a Job (true/false)}';
 
     /**
      * The console command description.

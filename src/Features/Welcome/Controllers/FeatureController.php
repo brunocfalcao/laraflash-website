@@ -2,14 +2,16 @@
 
 namespace Laraflash\Website\Features\Welcome\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Laraflash\DAL\Models\Article;
-use Laraflash\DAL\Models\Newsletter;
 use Laraflash\DAL\Models\CategoryMap;
 use Laraflash\DAL\Models\CategoryPosition;
+use Laraflash\DAL\Models\Newsletter;
+use Laraflash\Website\Mailables\NewsletterAdded;
 
 class FeatureController extends Controller
 {
@@ -202,7 +204,11 @@ class FeatureController extends Controller
 
     public function registerNewsletter()
     {
-        Newsletter::create(['email' => request()->input('email')]);
+        //Newsletter::create(['email' => request()->input('email')]);
+
+        Mail::to(request()->input('email'))
+              ->send(new NewsletterAdded);
+
         return flame('newsletter-done');
     }
 }
