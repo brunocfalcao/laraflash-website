@@ -56,9 +56,9 @@ class LaraflashServiceProvider extends ServiceProvider
     protected function publishAssets()
     {
         $this->publishes([
-            __DIR__.'/../resources/assets' => public_path(),
+            __DIR__.'/../resources/assets'   => public_path(),
             __DIR__.'/../resources/defaults' => public_path('storage/defaults'),
-            __DIR__.'/../config/flame.php' => config_path('flame.php')
+            __DIR__.'/../config/flame.php'   => config_path('flame.php'),
         ], 'laraflash-website-files');
     }
 }
