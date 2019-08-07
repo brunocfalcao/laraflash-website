@@ -54,7 +54,7 @@ class CrawlCommand extends Command
             if ($this->option('viajob')) {
                 $this->info('Dispatching job ...');
                 FetchArticlesFromDataSourceJob::dispatch($item, $this->option('attribute'), $this->option('value'))
-                                              ->onQueue(App::environment());
+                                              ->onQueue('laraflash-' . App::environment());
             } else {
                 $crawler = app()->makeWith($item->crawler_class, ['source' => $item]);
                 if (!is_null($this->option('attribute')) && !is_null($this->option('value'))) {
