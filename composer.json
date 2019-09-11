@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "illuminate/support": "~5.8.0",
+        "illuminate/support": "~5.8.0|^6.0",
         "coconutcraig/laravel-postmark": "^2.2",
         "brunocfalcao/flame": "dev-master",
         "brunocfalcao/laraflash-dal": "dev-master",
