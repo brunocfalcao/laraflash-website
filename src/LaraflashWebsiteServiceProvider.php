@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laraflash\Website\Commands\CrawlCommand;
 
-class LaraflashServiceProvider extends ServiceProvider
+class LaraflashWebsiteServiceProvider extends ServiceProvider
 {
     public function boot()
     {

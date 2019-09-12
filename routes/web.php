@@ -54,7 +54,7 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
     // Identify file location or return default Laraflash image.
     $filePath = File::exists(storage_path("app/public/images/{$thumbnail->filename}")) ?
                 storage_path("app/public/images/{$thumbnail->filename}") :
-                storage_path('app/public/defaults/default.jpg');
+                storage_path('app/public/defaults/default.png');
 
     // Verify if we have this image already in cache.
     $extension = collect(explode('.', $thumbnail->filename))->pop();
@@ -69,7 +69,7 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
     }
 
     // No cache. Create image.
-    $img = Image::make($filePath);
+    $img = Image::make(str_replace('/', '\\', $filePath));
 
     // Adjust canvas to make the best fit().
     $img->resizeCanvas(
