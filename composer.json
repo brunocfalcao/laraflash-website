@@ -8,7 +8,7 @@
         "brunocfalcao"
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.2",
         "illuminate/support": "^6.0",
         "coconutcraig/laravel-postmark": "^2.2",
         "brunocfalcao/flame": "^1.0",
