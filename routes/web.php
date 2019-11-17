@@ -69,12 +69,19 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
     }
 
     // No cache. Create image.
+    try {
+        $img = Image::make(str_replace('/', '\\', $filePath));
+    } catch (\Exception $exception) {
+        $img = Image::make(storage_path('app/public/defaults/default.png'));
+    }
+    /*
     $img = @Image::make(str_replace('/', '\\', $filePath));
 
     // Issues with image not readable? Fallback to default.
     if (!$img) {
         $img = Image::make(storage_path('app/public/defaults/default.png'));
     }
+    */
 
     // Adjust canvas to make the best fit().
     $img->resizeCanvas(
