@@ -21,6 +21,7 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
 
     // Compute filename (database or default.png).
     $thumbnail = Thumbnail::where('hash', $hash)->first();
+
     if (is_null($thumbnail)) {
         // Grab the data source default image.
         $filename = strtolower($hash);
@@ -70,7 +71,7 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
 
     // No cache. Create image.
     try {
-        $img = Image::make(str_replace('/', '\\', $filePath));
+        $img = Image::make(str_replace('\\', '/', $filePath));
     } catch (\Exception $exception) {
         $img = Image::make(storage_path('app/public/defaults/default.png'));
     }
