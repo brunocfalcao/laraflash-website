@@ -1,4 +1,4 @@
-<footer class="footer footer--dark">
+<footer class="footer footer--dark" id="newsletter">
     <div class="container">
         <div class="footer__widgets">
             <div class="row" id="footer">
