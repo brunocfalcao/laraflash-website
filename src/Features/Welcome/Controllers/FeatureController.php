@@ -203,10 +203,12 @@ class FeatureController extends Controller
 
     public function registerNewsletter()
     {
-        //Newsletter::create(['email' => request()->input('email')]);
+        Newsletter::create(['email' => request()->input('email')]);
 
+        /*
         Mail::to(request()->input('email'))
               ->send(new NewsletterAdded());
+        */
 
         return flame('newsletter-done');
     }
