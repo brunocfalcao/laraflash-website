@@ -40,10 +40,10 @@ class LaraflashWebsiteServiceProvider extends ServiceProvider
     {
         $requests = config('app.env') == 'production' ? 30 : 60;
         Route::group(['middleware' => ['web',
-               /*"throttle:{$requests},1",*/
-               /*'firewall-blacklist',
+            /*"throttle:{$requests},1",*/
+        /*'firewall-blacklist',
                'firewall-blockattacks'*/],
-           ], function ($router) {
+        ], function ($router) {
                $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
            });
     }
