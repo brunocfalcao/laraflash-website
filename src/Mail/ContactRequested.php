@@ -40,7 +40,7 @@ class ContactRequested extends Mailable implements ShouldQueue
             $message->getHeaders()->addTextHeader('tag', 'Contact Request');
         });
 
-        list($name, $email, $subject, $message) = [$this->name, $this->email, $this->subject, $this->message];
+        [$name, $email, $subject, $message] = [$this->name, $this->email, $this->subject, $this->message];
 
         return $this->from('system@laraflash.com')
                         ->subject($subject)
