@@ -15,8 +15,10 @@ class FetchArticlesFromDataSourceJob implements ShouldQueue
     protected $attribute;
     protected $value;
 
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
     /**
      * Create a new job instance.
      *
@@ -38,7 +40,7 @@ class FetchArticlesFromDataSourceJob implements ShouldQueue
     {
         $crawler = app()->makeWith($this->source->crawler_class, ['source' => $this->source]);
 
-        if (! is_null($this->attribute) && ! is_null($this->value)) {
+        if (!is_null($this->attribute) && !is_null($this->value)) {
             $crawler->{$this->attribute} = $this->value;
         }
 

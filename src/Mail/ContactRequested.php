@@ -9,8 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ContactRequested extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
-
+    use Queueable;
+    use SerializesModels;
     public $name;
     public $email;
     public $subject;
