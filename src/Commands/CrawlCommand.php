@@ -57,7 +57,7 @@ class CrawlCommand extends Command
                                               ->onQueue('laraflash-'.App::environment());
             } else {
                 $crawler = app()->makeWith($item->crawler_class, ['source' => $item]);
-                if (!is_null($this->option('attribute')) && !is_null($this->option('value'))) {
+                if (! is_null($this->option('attribute')) && ! is_null($this->option('value'))) {
                     $this->info("Setting crawler attribute {$this->option('attribute')} to {$this->option('value')}");
                     $crawler->{$this->option('attribute')} = $this->option('value');
                 }

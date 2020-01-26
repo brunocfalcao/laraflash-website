@@ -44,8 +44,8 @@ class LaraflashWebsiteServiceProvider extends ServiceProvider
         /*'firewall-blacklist',
                'firewall-blockattacks'*/],
         ], function ($router) {
-               $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-           });
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        });
     }
 
     protected function loadViews()
