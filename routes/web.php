@@ -27,7 +27,7 @@ Route::get('images/{width}/{height}/{hash}/{hook?}', function ($width, $height, 
         $filename = strtolower($hash);
 
         // Check if the data source default image exists.
-        if (!File::exists(storage_path("app/public/defaults/{$filename}.jpg"))) {
+        if (! File::exists(storage_path("app/public/defaults/{$filename}.jpg"))) {
             // Use the default Laraflash news image and resize it.
             $filename = 'default';
         }

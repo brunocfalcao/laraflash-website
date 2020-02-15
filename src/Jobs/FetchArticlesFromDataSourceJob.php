@@ -41,7 +41,7 @@ class FetchArticlesFromDataSourceJob implements ShouldQueue
     {
         $crawler = app()->makeWith($this->source->crawler_class, ['source' => $this->source]);
 
-        if (!is_null($this->attribute) && !is_null($this->value)) {
+        if (! is_null($this->attribute) && ! is_null($this->value)) {
             $crawler->{$this->attribute} = $this->value;
         }
 
